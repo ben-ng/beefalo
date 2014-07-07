@@ -1,0 +1,33 @@
+{
+  "name": "beefalo",
+  "version": "1.0.0",
+  "description": "A streaming shift-reduce parser written in vanilla Javascript",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "node test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ben-ng/beefalo"
+  },
+  "keywords": [
+    "lr",
+    "sr",
+    "parser",
+    "context-free",
+    "stream",
+    "compiler"
+  ],
+  "author": "Ben Ng <me@benng.me>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ben-ng/beefalo/issues"
+  },
+  "homepage": "https://github.com/ben-ng/beefalo",
+  "dependencies": {
+    "finite-automata": "3.x.x"
+  },
+  "devDependencies": {
+    "tape": "2.x.x"
+  }
+}
