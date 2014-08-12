@@ -32,7 +32,7 @@ test('first', function (t) {
       [ 'a', 'b' ],
       [ 'a' ],
       [ 'b' ] ]
-  , {C: ['a', 'b']} ]
+  , { A: [ 'a', 'b' ], 'A C': [ 'a', 'b' ], B: [ 'a', 'b' ], 'B C': [ 'a', 'b' ], C: [ 'a', 'b' ] } ]
   , 'Should return two first tables, one for NTs, one for RHS, and one for every sequence after a NT')
 
 })

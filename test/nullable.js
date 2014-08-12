@@ -17,7 +17,7 @@ test('nullable', function (t) {
   t.deepEqual(nullableTable
     , [ [ false, false, false, false, false ]
     , [ false, false, false, false, false, false, false, false, false ]
-    , {C: false} ]
+    , {A: false, 'A C': false, B: false, 'B C': false, C: false} ]
     , 'Should return two nullable tables, one for NTs, one for RHS, ' +
       'one for every sequence after a NT, all false')
 })
