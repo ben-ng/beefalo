@@ -1,6 +1,6 @@
 require('./errors')
 require('./nfa-generation')
-require('./nullable')
 require('./enumerate-sequences')
+require('./nullable')
 require('./first')
 require('./follow')
