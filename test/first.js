@@ -11,8 +11,9 @@ test('first', function (t) {
   t.deepEqual(firstTable
     , [
         [ [ 'a', 'b' ], [ 'a', 'b' ], [ 'b' ] ]
-      , [ [ 'a', 'b' ], [ 'b' ], [ 'a' ], [], [ 'b' ] ] ]
-    , 'Should return two first tables, one for NTs and one for RHS')
+      , [ [ 'a', 'b' ], [ 'b' ], [ 'a' ], [], [ 'b' ] ]
+      , {c: ['c']} ]
+    , 'Should return three first tables, one for NTs, one for RHS, and one for every sequence after a NT')
 
   firstTable = first(harderGrammar)
 
@@ -30,7 +31,8 @@ test('first', function (t) {
       [ 'b' ],
       [ 'a', 'b' ],
       [ 'a' ],
-      [ 'b' ] ] ]
-  , 'Should return two first tables, one for NTs and one for RHS')
+      [ 'b' ] ]
+  , {C: ['a', 'b']} ]
+  , 'Should return two first tables, one for NTs, one for RHS, and one for every sequence after a NT')
 
 })
