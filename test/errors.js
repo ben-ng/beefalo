@@ -11,5 +11,6 @@ test('errors', function (t) {
       }
     , expected = 'A token is in both the terminal and nonterminal definitions'
 
-  t.ok(grammar2nfa(badGrammar).toString().indexOf(expected)>-1)
+  t.ok(grammar2nfa(badGrammar).toString().indexOf(expected)>-1
+    , 'Should error if a token is both a NT and T')
 })
