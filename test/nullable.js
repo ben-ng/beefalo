@@ -9,13 +9,15 @@ test('nullable', function (t) {
   var nullableTable = nullable(simpleGrammar)
 
   t.deepEqual(nullableTable
-    , [ [ true, true, true ], [ true, true, false, true, false ] ]
-    , 'Should return two nullable tables, one for NTs and one for RHS')
+    , [ [ true, true, true ], [ true, true, false, true, false ], {c: false} ]
+    , 'Should return three nullable tables, one for NTs, one for RHS, one for every sequence after a NT')
 
   nullableTable = nullable(harderGrammar)
 
   t.deepEqual(nullableTable
     , [ [ false, false, false, false, false ]
-    , [ false, false, false, false, false, false, false, false, false ] ]
-    , 'Should return two nullable tables, one for NTs and one for RHS, all false')
+    , [ false, false, false, false, false, false, false, false, false ]
+    , {C: false} ]
+    , 'Should return two nullable tables, one for NTs, one for RHS, ' +
+      'one for every sequence after a NT, all false')
 })
