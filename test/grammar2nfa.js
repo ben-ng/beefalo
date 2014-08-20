@@ -12,6 +12,7 @@ test('nfa generation', function (t) {
   t.deepEqual(nfa
     , {
         accept: [ 'B', 'D', 'H', 'I', 'L' ]
+      , productionMap: { B: 0, D: 1, H: 2, I: 3, L: 4 }
       , initial: 'A'
       , transitions: {
           A: [ 'T', 'B', '\x00', 'C', '\x00', 'E' ]
@@ -33,14 +34,25 @@ test('nfa generation', function (t) {
       , {
           accept: [ 'B', 'D', 'C,E,F,I,J', 'I,J,K', 'L', 'H' ]
         , initial: 'A,C,E,I,J'
+        , aliasMap: {
+            'A,C,E,I,J': [ 'A', 'C', 'E', 'I', 'J' ]
+          , B: [ 'B' ]
+          , 'C,E,F,I,J': [ 'C', 'E', 'F', 'I', 'J' ]
+          , D: [ 'D' ]
+          , G: [ 'G' ]
+          , H: [ 'H' ]
+          , 'I,J,K': [ 'I', 'J', 'K' ]
+          , L: [ 'L' ]
+          }
         , transitions: {
             'A,C,E,I,J': [ 'T', 'B', 'R', 'D', 'a', 'C,E,F,I,J', 'b', 'I,J,K' ]
-          , B: [], 'C,E,F,I,J': [ 'R', 'D', 'a', 'C,E,F,I,J', 'T', 'G', 'b', 'I,J,K' ]
+          , B: []
           , D: []
-          , G: [ 'c', 'H' ]
-          , H: []
+          , 'C,E,F,I,J': [ 'R', 'D', 'a', 'C,E,F,I,J', 'T', 'G', 'b', 'I,J,K' ]
           , 'I,J,K': [ 'b', 'I,J,K', 'R', 'L' ]
+          , G: [ 'c', 'H' ]
           , L: []
+          , H: []
           }
         }, 'DFA should match expected LR table')
 
@@ -61,6 +73,7 @@ test('nfa generation', function (t) {
   t.deepEqual(nfa
     , {
         accept: [ 'B', 'D', 'E' ]
+      , productionMap: { B: 0, D: 1, E: 2 }
       , initial: 'A'
       , transitions: {
           A: [ 'A', 'B', '\x00', 'C', '\x00', 'E' ]
@@ -74,6 +87,7 @@ test('nfa generation', function (t) {
   t.deepEqual(new Fragment(nfa).toDfa(',')
     , {
         accept: [ 'B', 'D' ]
+      , aliasMap: { B: [ 'B' ], D: [ 'D' ], E: [ 'E' ] }
       , initial: 'E'
       , transitions: { B: [], D: [], E: [ 'A', 'B', 'a', 'D' ] }
       })

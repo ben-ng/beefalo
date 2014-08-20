@@ -12,6 +12,7 @@ Terminals = [
   'a'
 , 'b'
 , 'c'
+, '-1'
 ]
 
 Rules = [

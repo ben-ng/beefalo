@@ -26,7 +26,7 @@
   "homepage": "https://github.com/ben-ng/beefalo",
   "dependencies": {
     "deep-equal": "^0.2.1",
-    "finite-automata": "^3.3.0"
+    "finite-automata": "^3.4.1"
   },
   "devDependencies": {
     "tape": "2.x.x",
