@@ -5,13 +5,18 @@ var test = require('tape')
   , terminateGrammar = require('../lib/terminate-grammar')
 
 test('follow', function (t) {
-  t.plan(2)
+  t.plan(3)
 
-  var followTable = follow(terminateGrammar(simpleGrammar))
+  var savedGrammar = terminateGrammar(simpleGrammar)
+    , followTable = follow(savedGrammar)
 
   t.deepEqual(followTable
     , { R: [ -1, 'c' ], T: [ -1, 'c' ], 'T\'': [ -1 ] }
     , 'Should return one follow table for the simple grammar')
+
+  t.strictEqual(follow(savedGrammar)
+    , followTable
+    , 'Should cache the computed follow table')
 
   followTable = follow(terminateGrammar(harderGrammar))
 
