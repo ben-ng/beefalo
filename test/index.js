@@ -1,4 +1,4 @@
-require('./errors')
+// require('./errors')
 require('./nfa-generation')
 require('./enumerate-sequences')
 require('./nullable')

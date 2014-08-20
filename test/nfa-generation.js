@@ -11,36 +11,36 @@ test('nfa generation', function (t) {
 
   t.deepEqual(nfa
     , {
-        initial: 0,
-        accept: [ 'T\'->T', 'T->R', 'T->aTc', 'R->', 'R->bR' ],
-        transitions:
-        {
-          '0': [ 'T', 'T\'->T', '\u0000', 1, '\u0000', 2 ],
-          '1': [ 'R', 'T->R', '\u0000', 'R->', '\u0000', 5 ],
-          '2': [ 'a', 3 ],
-          '3': [ 'T', 4, '\u0000', 1, '\u0000', 2 ],
-          '4': [ 'c', 'T->aTc' ],
-          '5': [ 'b', 6 ],
-          '6': [ 'R', 'R->bR', '\u0000', 'R->', '\u0000', 5 ],
-          'T\'->T': [],
-          'T->R': [],
-          'T->aTc': [],
-          'R->': [],
-          'R->bR': []
+        accept: [ 'B', 'D', 'H', 'I', 'L' ]
+      , initial: 'A'
+      , transitions: {
+          A: [ 'T', 'B', '\x00', 'C', '\x00', 'E' ]
+        , B: []
+        , C: [ 'R', 'D', '\x00', 'I', '\x00', 'J' ]
+        , D: []
+        , E: [ 'a', 'F' ]
+        , F: [ 'T', 'G', '\x00', 'C', '\x00', 'E' ]
+        , G: [ 'c', 'H' ]
+        , H: []
+        , I: []
+        , J: [ 'b', 'K' ]
+        , K: [ 'R', 'L', '\x00', 'I', '\x00', 'J' ]
+        , L: []
         }
       }, 'NFA should match expected value')
 
   t.deepEqual(new Fragment(nfa).toDfa(',')
       , {
-          accept: [ 'T\'->T', 'T->R', 'R->', 'R->', 'R->bR', 'T->aTc' ]
-        , initial: 'R->'
+          accept: [ 'B', 'D', 'C,E,F,I,J', 'I,J,K', 'L', 'H' ]
+        , initial: 'A,C,E,I,J'
         , transitions: {
-            4: [ 'c', 'T->aTc' ]
-          , 'R->': [ 'R', 'T->R', 'a', 'R->', 'T', '4', 'b', 'R->' ]
-          , 'R->bR': []
-          , 'T\'->T': []
-          , 'T->R': []
-          , 'T->aTc': []
+            'A,C,E,I,J': [ 'T', 'B', 'R', 'D', 'a', 'C,E,F,I,J', 'b', 'I,J,K' ]
+          , B: [], 'C,E,F,I,J': [ 'R', 'D', 'a', 'C,E,F,I,J', 'T', 'G', 'b', 'I,J,K' ]
+          , D: []
+          , G: [ 'c', 'H' ]
+          , H: []
+          , 'I,J,K': [ 'b', 'I,J,K', 'R', 'L' ]
+          , L: []
           }
         }, 'DFA should match expected LR table')
 
@@ -60,22 +60,21 @@ test('nfa generation', function (t) {
 
   t.deepEqual(nfa
     , {
-        accept: [ 'S->A', 'A->a', 'A->' ]
-      , initial: 0
+        accept: [ 'B', 'D', 'E' ]
+      , initial: 'A'
       , transitions: {
-          0: [ 'A', 'S->A', '\x00', 1, '\x00', 'A->' ]
-        , 1: [ 'a', 'A->a' ], 'A->': [], 'A->a': [], 'S->A': []
+          A: [ 'A', 'B', '\x00', 'C', '\x00', 'E' ]
+        , B: []
+        , C: [ 'a', 'D' ]
+        , D: []
+        , E: []
         }
       }, 'NFA should match expected value')
 
   t.deepEqual(new Fragment(nfa).toDfa(',')
     , {
-        initial: 'A->',
-        accept: [ 'S->A', 'A->a' ],
-        transitions: {
-          'A->': [ 'A', 'S->A', 'a', 'A->a' ],
-          'A->a': [],
-          'S->A': []
-        }
+        accept: [ 'B', 'D' ]
+      , initial: 'E'
+      , transitions: { B: [], D: [], E: [ 'A', 'B', 'a', 'D' ] }
       })
 })
